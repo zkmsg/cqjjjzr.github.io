@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        在Windows+MSVC+CMake上处理资源文件嵌入 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 宇宙に始まりはあるが、终わりはない </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/head.png" />
+        </div>
+        <div class="name">
+            <i>Charlie Jiang</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动机"><span class="toc-text">动机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一些基础介绍"><span class="toc-text">一些基础介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rc文件"><span class="toc-text">.rc文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于资源ID与resource-h的问题"><span class="toc-text">关于资源ID与resource.h的问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CMake的操作"><span class="toc-text">CMake的操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在程序中获取资源"><span class="toc-text">在程序中获取资源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#顺道一提"><span class="toc-text">顺道一提</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 宇宙に始まりはあるが、终わりはない </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        在Windows+MSVC+CMake上处理资源文件嵌入
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-10-01 17:50:40</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#cmake" title="cmake">cmake</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#C++" title="C++">C++</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Windows" title="Windows">Windows</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#MSVC" title="MSVC">MSVC</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>最近在改善wangqr迁移的CMake 版本<a href="https://github.com/cqjjjzr/Aegisub/tree/dev-cj" target="_blank" rel="noopener">Aegisub</a>构建系统。Aegisub 最开始的资源构建是借助<a href="https://github.com/Aegisub/Aegisub/blob/master/tools/respack.lua" target="_blank" rel="noopener">一个脚本</a>将二进制的资源文件打包成这样的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"libresrc.h"</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> splash[] = &#123;<span class="number">137</span>,<span class="number">80</span>,<span class="number">78</span>,<span class="number">71</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">26</span>,<span class="number">10</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">13</span>,<span class="number">73</span>,<span class="number">72</span>,<span class="number">68</span>,<span class="number">82</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">164</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">240</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">192</span>,<span class="number">70</span>,<span class="number">135</span>,<span class="number">55</span>,<span class="number">0.</span>....................................&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>随后直接在代码中引用<code>splash</code>这样的符号。我觉得这样的方式不太neat，并且编译时需要借助lua，因此对于Windows系统我将这套资源嵌入的机制改成了基于Windows的Resource Compiler。并且我需要将这个机制做到CMake中。</p>
+<h1 id="一些基础介绍"><a href="#一些基础介绍" class="headerlink" title="一些基础介绍"></a>一些基础介绍</h1><p>下列文段摘自MSDN：</p>
+<blockquote>
+<p>A <em>resource</em> is binary data that you can add to the executable file of a Windows-based application. A resource can be either standard or defined. The data in a <em>standard resource</em> describes an icon, cursor, menu, dialog box, bitmap, enhanced metafile, font, accelerator table, message-table entry, string-table entry, or version information. An <em>application-defined resource</em>, also called a <em>custom resource</em>, contains any data required by a specific application.</p>
+</blockquote>
+<p>正如其所说，通过Windows的资源机制才是嵌入二进制数据的正确方法。这有些类似于macOS上的Bundle，而Linux上暂时没有发现类似的机制（然而我认为此种情况仍不应该直接就把二进制数据怼进elf里面，或许直接让文件散出来更好）。</p>
+<h1 id="rc文件"><a href="#rc文件" class="headerlink" title=".rc文件"></a>.rc文件</h1><p>在MSVC工具链中，为了嵌入资源，我们需要将资源脚本文件（.rc）编译为资源文件（.res）并在链接.exe或.dll时提供。这些资源将会被链接进.exe的<code>.rsrc</code>段中，并可在运行时获取。</p>
+<p>Aegisub的资源主要由图片（.png）和默认配置文件（.json）组成。为了方便，在.rc文件中我们统一将其视为二进制文件（图片涉及到编码问题，且没有那么容易取出，因为我们不是GDI人，配置文件作为字符串涉及到本地化问题）。</p>
+<p>rc里面为了定义一个资源，需要添加许多这样的语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resource_id type path</span><br></pre></td></tr></table></figure>
+
+<p>而后编译并链接res文件，即可在程序中访问资源。</p>
+<h2 id="关于资源ID与resource-h的问题"><a href="#关于资源ID与resource-h的问题" class="headerlink" title="关于资源ID与resource.h的问题"></a>关于资源ID与<code>resource.h</code>的问题</h2><p>在某些教程甚至MSDN中，我注意到他们采用了这样的方式定义资源：</p>
+<p>首先创建一个<code>resource.h</code>，并加入这样的语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IDC_MYAPP_POINTER     <span class="number">101</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在.rc文件中这样写</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"resource.h"</span></span></span><br><span class="line">IDC_MYAPP_POINTER CURSOR f.cur</span><br></pre></td></tr></table></figure>
+
+<p>这样你就可以在代码中这样做</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor = LoadCursor(hInstance, MAKEINTRESOURCE(IDC_MYAPP_POINTER));</span><br></pre></td></tr></table></figure>
+
+<p>这样实际上是以数字作为资源的ID。然而实际上，除了字符串资源，其他的资源均可使用字符串作为ID，且<code>resource.h</code>也不是必须的。这只是一个VS的习惯。因此我们只需生成使用字符串作为ID的rc文件即可。</p>
+<h1 id="CMake的操作"><a href="#CMake的操作" class="headerlink" title="CMake的操作"></a>CMake的操作</h1><p>首先我们收集资源目录下所有的资源文件。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">file</span>(GLOB_RECURSE CONFIGURE_DEPENDS AEGISUB_BITMAPS resources/*.png)</span><br><span class="line"><span class="keyword">file</span>(GLOB AEGISUB_CONFIGS CONFIGURE_DEPENDS resources/configs/*.json)</span><br></pre></td></tr></table></figure>
+
+<p>这里为了方便我们使用了<code>file(GLOB_RECURSE)</code> 的方法。许多人指出以这种方法收集文件是不对的，而应该直接将所有列举在CMake文件中。这里暂时先不考虑这么多。</p>
+<p>随后开始生成需要的.rc文件的内容：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span>(BITMAP_FILENAME IN LISTS AEGISUB_BITMAPS)</span><br><span class="line">  <span class="keyword">get_filename_component</span>(BITMAP_NAME <span class="variable">$&#123;BITMAP_FILENAME&#125;</span> NAME_WE)</span><br><span class="line">  <span class="keyword">string</span>(APPEND AEGISUB_RES_WIN_RC_ENTRIES <span class="string">"bitmap_$&#123;BITMAP_NAME&#125; RCDATA $&#123;BITMAP_FILENAME&#125;\n"</span>)</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(CONFIG_FILENAME IN LISTS AEGISUB_CONFIGS)</span><br><span class="line">  <span class="keyword">get_filename_component</span>(CONFIG_NAME <span class="variable">$&#123;CONFIG_FILENAME&#125;</span> NAME_WE)</span><br><span class="line">  <span class="keyword">string</span>(APPEND AEGISUB_RES_WIN_RC_ENTRIES <span class="string">"config_$&#123;CONFIG_NAME&#125; RCDATA $&#123;CONFIG_FILENAME&#125;\n"</span>)</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br></pre></td></tr></table></figure>
+
+<p>此时我们需要特别注意：如果直接将<code>AEGISUB_RES_WIN_RC_ENTRIES</code>的内容通过<code>file(WRITE)</code>等写入文件，会导致每次执行CMake的时候都重新生成这个文件（虽然内容没有变），并导致RC重新编译一次。</p>
+<p>因此，我们应该使用<code>configure_file()</code>而非<code>file(WRITE)</code>来解决这个问题。而为了使用这个命令，我们需要先创建一个<code>resources.rc.in</code>文件，其中只有一行内容</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@AEGISUB_RES_WIN_RC_ENTRIES@</span><br></pre></td></tr></table></figure>
+
+<p>随后直接执行：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">configure_file</span>(resources/resource.rc.in src/generated/windows/resource.rc)</span><br></pre></td></tr></table></figure>
+
+<p>即可自动将<code>AEGISUB_RES_WIN_RC_ENTRIES</code>变量的内容写入，且并不会在文件内容相同时碰文件。</p>
+<p>最终，我们需要在编译的时候加入RC文件作为源文件，CMake和MSVC会自动编译出res并链接。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_sources</span>(Aegisub PRIVATE</span><br><span class="line">		src/generated/windows/resource.rc)</span><br></pre></td></tr></table></figure>
+
+<h1 id="在程序中获取资源"><a href="#在程序中获取资源" class="headerlink" title="在程序中获取资源"></a>在程序中获取资源</h1><p>前面提到我们将所有的资源文件视为二进制文件（对应的资源类型为<code>RCDATA</code>）。因此根据MSDN的介绍，我们需要<code>FindResource</code>、<code>LoadResource</code>并<code>LockResource</code>来加载。完整代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">char</span>&gt; LoadBinary(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name, OUT <span class="keyword">size_t</span>&amp; outLength)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">auto</span> nameStr = charset::ConvertW(name); <span class="comment">// std::string -&gt; std::wstring</span></span><br><span class="line">	HRSRC resSrc = FindResource(<span class="literal">NULL</span>, nameStr.c_str(), RT_RCDATA);</span><br><span class="line">	<span class="keyword">if</span> (resSrc == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">throw</span> BadResourceException(<span class="string">"Failed to find resource "</span> + name + <span class="string">":"</span> + util::ErrorString(GetLastError()));</span><br><span class="line">	HGLOBAL res = LoadResource(<span class="literal">NULL</span>, resSrc);</span><br><span class="line">	<span class="keyword">if</span> (res == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">throw</span> BadResourceException(<span class="string">"Failed to load resource "</span> + name + <span class="string">":"</span> + util::ErrorString(GetLastError()));</span><br><span class="line"></span><br><span class="line">	DWORD size = SizeofResource(<span class="literal">NULL</span>, resSrc);</span><br><span class="line">	<span class="keyword">if</span> (size &lt;= <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> BadResourceException(<span class="string">"Failed to load resource "</span> + name + <span class="string">", the reported size was 0. "</span> + util::ErrorString(GetLastError()));</span><br><span class="line">	<span class="keyword">auto</span> buf = <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">char</span>&gt;(<span class="keyword">new</span> <span class="keyword">char</span>[size]);</span><br><span class="line">	LPVOID originBuf = LockResource(res);</span><br><span class="line">	<span class="keyword">if</span> (originBuf == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">throw</span> BadResourceException(<span class="string">"Failed to load resource "</span> + name + <span class="string">", failed to get resource buffer. "</span> + util::ErrorString(GetLastError()));</span><br><span class="line">	CopyMemory(buf.get(), originBuf, size);</span><br><span class="line">	outLength = size;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> buf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="顺道一提"><a href="#顺道一提" class="headerlink" title="顺道一提"></a>顺道一提</h2><p>我们可以先尝试以零散文件的方式加载资源，如果没有对应的文件，再去寻找嵌入在exe中的资源。虽然我们不是在写galgame，因此没有什么必要，但毕竟Linux是使用的此种方法，所以也无所谓。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/CharlieJiang0w0">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/charliejiang">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/5525499632">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/cqjjjzr">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
