@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Aegisub-wxWidgets-expat-conan：记一次曲折的Debug - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 宇宙に始まりはあるが、终わりはない </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/head.png" />
+        </div>
+        <div class="name">
+            <i>Charlie Jiang</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#未完待续"><span class="toc-text">未完待续</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#起因"><span class="toc-text">起因</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Conan与其贡献者的组织形式"><span class="toc-text">Conan与其贡献者的组织形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#expat包的那些事儿"><span class="toc-text">expat包的那些事儿</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一次Pull-Request"><span class="toc-text">第一次Pull Request</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二次Pull-Request"><span class="toc-text">第二次Pull Request</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 宇宙に始まりはあるが、终わりはない </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Aegisub-wxWidgets-expat-conan：记一次曲折的Debug
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-10-05 11:28:15</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#C++" title="C++">C++</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Conan" title="Conan">Conan</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#CMake" title="CMake">CMake</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Aegisub" title="Aegisub">Aegisub</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h1><h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>最起初，我准备给Aegisub写通过Conan进行依赖解析的脚本。在此过程中有两个包出现了一个令人哭笑不得的依赖冲突：<code>wxWidgets@bincrafters</code>包依赖<code>Expat@Pix4d</code>，而<code>fontconfig</code>包依赖<code>expat@_</code>。</p>
+<h2 id="Conan与其贡献者的组织形式"><a href="#Conan与其贡献者的组织形式" class="headerlink" title="Conan与其贡献者的组织形式"></a>Conan与其贡献者的组织形式</h2><p><a href="https://conan.io" target="_blank" rel="noopener">Conan</a>是一个开源的包管理工具，而与<code>apt</code>、<code>choco</code>等包管理器不同的是，Conan主要分发的是各种开发时候需要引用的库，且以<code>C/C++</code>等本地语言为主。而其另一个特征是提供两种形式的包：</p>
+<ol>
+<li>无论如何都会提供源包的构建脚本，即假设我在为包<code>expat</code>创建Conan打包，我必须提供一个脚本以下载<code>expat</code>的源代码并构建<code>expat</code>，且通常要同时兼容Windows、Linux与macOS。</li>
+<li>我可以提供任意数量的已经编译好的二进制包，每个包与某个平台、配置关联（例如：Windows+MSVC）。</li>
+</ol>
+<p>因此这为C/C++的库分发带来了灵活性与便利性（相较于使用传统的包管理器或手动编译安装而言）。</p>
+<p>而Conan的分发与传统包管理器相似，存在“源”的概念，即下载的服务器。对于开源项目而言，<a href="http://bintray.com" target="_blank" rel="noopener">Bintray</a>友情提供了大量的服务器资源。因此我们可以在Bintray上创建自己的Conan Repo并往里面上传软件包。在社区发展过程中产生了最大的两大贡献者：bincrafters与conan-community。这两个均是社区组织，且人员有较大穿插。虽然我们可以自己上传包，但是很多包的Conan脚本已经被这些大佬写好，我们只需要引用他们的库即可。</p>
+<p>同时就不得不提到另一个库<code>conan-center</code>，顾名思义这是Conan的中心仓库。但这个仓库本身并无任何包。与之相对应的是，bincrafters等其他组织写好了脚本之后提出“包含请求”，通过审核之后将bincrafters下的这个包“链接”到中心仓库。因此大部分情况我们是到中央仓库去寻找包，因为其汇聚了各路贡献者的构建脚本。</p>
+<p>然而这些库毕竟都是由社区管理，难免出现存在bug、弃坑的情况。这次我们同时踩上了这两个坑。</p>
+<h2 id="expat包的那些事儿"><a href="#expat包的那些事儿" class="headerlink" title="expat包的那些事儿"></a><code>expat</code>包的那些事儿</h2><p><a href="https://github.com/libexpat/libexpat" target="_blank" rel="noopener">expat</a>包是一个开源的XML处理包。最初其Conan脚本由称为Pix4d的商业公司维护并已进入中央仓库，而wxWidgets、fontconfig等包均依赖了这个包。然而后来这个公司没有继续维护该脚本，piponazo接过了接力棒。</p>
+<p>同时Conan的中央仓库组织形式发生了大变：以前是各个贡献者自行维护后链接到中央仓库，但是现在开始逐渐迁移为各个贡献者将构建脚本<em>上传</em>到中央仓库，这样所有人都可以方便地维护这些脚本。而expat也有了一个真·中央仓库版本。</p>
+<p>问题在于：现在引用expat的包分为了两类：一类引用Pix4D版本（由piponazo维护），一类引用Conan中央仓库的包。</p>
+<p>更严重的是，Pix4D的包全名为<code>Expat/2.2.9@pix4d/stable</code>，而中央仓库的<code>expat/2.2.7@_/_</code>。注意到那个大小写了吗？问题在于，Conan将不同大小写的包视为不同的包，但Conan的目录组织形式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- data</span><br><span class="line">--- Expat</span><br><span class="line">----- pix4d</span><br></pre></td></tr></table></figure>
+
+<p>因此在Windows、macOS（未使用APFS区分大小写）等文件系统不区分大小写的系统上，无法做到区分<code>Expat</code>与<code>expat</code>文件夹。因此Conan会直接报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&gt; [CMake] ERROR: Requested &apos;Expat/2.2.6@pix4d/stable&apos; but found case incompatible &apos;expat&apos;</span><br><span class="line">1&gt; [CMake] Case insensitive filesystem can&apos;t manage this</span><br></pre></td></tr></table></figure>
+
+<p>解决方案听上去很简单：统一各个依赖expat的库的依赖就行了。例如目前我们正在将<code>wxWidgets</code>与<code>fontconfig</code>均统一为中央仓库的expat。然而事情没有那么简单.</p>
+<h1 id="第一次Pull-Request"><a href="#第一次Pull-Request" class="headerlink" title="第一次Pull Request"></a>第一次Pull Request</h1><p>在最初出现这个问题之前，我就已经发现了<code>fontconfig</code>的构建脚本中的bug，并提交了<a href="https://github.com/conan-community/conan-fontconfig/pull/5" target="_blank" rel="noopener">Pull Request</a>。在这个过程中仓库的维护者建议我将<code>fontconfig</code>的expat引用更换为中央仓库的版本：</p>
+<blockquote>
+<p>Expat is now in CCI</p>
+<p><a href="https://github.com/cqjjjzr" target="_blank" rel="noopener">@cqjjjzr</a> I suggest you change it the dependency to <code>expat/2.2.7</code> and we could merge this for now</p>
+</blockquote>
+<p>替换之后这一Pull Request被通过并发布。</p>
+<h1 id="第二次Pull-Request"><a href="#第二次Pull-Request" class="headerlink" title="第二次Pull Request"></a>第二次Pull Request</h1><p>仍然是在出现这个问题之前，我发现了<code>wxWidgets</code>库的Conan构建脚本给出的构建选项太少了，因此提出了一个<a href="https://github.com/bincrafters/conan-wxwidgets/pull/15" target="_blank" rel="noopener">Pull Request</a>要求添加自定义构建开关的options。在交涉之后这一Pull Request得到了通过。同时在<code>wxWidgets</code>构建脚本的<em><code>testing</code></em>分支，<code>expat</code>的引用更换成了中央仓库的版本。</p>
+<p>然而<code>testing</code>分支的CI却持续报错，导致其不能被转移到<code>stable</code>分支并发布。部分错误是由于<code>Azure Pipelines</code>上的某些平台没有预构建包。但AppVeyor上另一部分的报错非常奇怪，首先出错的任务全部是Windows上MSVC工具链的Debug编译类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CMake Error at source_subfolder/build/cmake/functions.cmake:468 (add_library):</span><br><span class="line">  Cannot find source file:</span><br><span class="line">    C:/Users/appveyor/.conan/data/wxwidgets/3.1.2/bincrafters/testing/build/463db5591e13764936bd38b9982ad6251f59bd3e/source_subfolder/src/expat/expat/lib/xmlparse.c</span><br><span class="line">  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm</span><br><span class="line">  .hpp .hxx .in .txx</span><br><span class="line">Call Stack (most recent call first):</span><br><span class="line">  source_subfolder/build/cmake/lib/expat.cmake:11 (wx_add_builtin_library)</span><br><span class="line">  source_subfolder/build/cmake/lib/CMakeLists.txt:28 (include)</span><br></pre></td></tr></table></figure>
+
+<p>诡异的是，根据<code>conanfile.py</code>，<code>wxWidgets</code>应该使用外部引用来的<code>expat</code>，而日志中明显是在尝试构建内建的<code>expat</code>（这需要先通过<code>git submodule</code>拉取<code>expat</code>代码）且上面的配置日志也说明了这一点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- Which libraries should wxWidgets use?</span><br><span class="line">    wxUSE_REGEX: builtin (enable support for wxRegEx class)</span><br><span class="line">    wxUSE_ZLIB: sys (use zlib for LZW compression)</span><br><span class="line">    wxUSE_EXPAT: builtin (use expat for XML parsing) # 注意这里</span><br><span class="line">    wxUSE_LIBJPEG: sys (use libjpeg (JPEG file format))</span><br><span class="line">    wxUSE_LIBPNG: sys (use libpng (PNG image format))</span><br><span class="line">    wxUSE_LIBTIFF: sys (use libtiff (TIFF file format))</span><br><span class="line">    wxUSE_LIBLZMA: OFF (use liblzma for LZMA compression)</span><br><span class="line">    wxUSE_STL: OFF (Use C++ STL classes)</span><br></pre></td></tr></table></figure>
+
+<p>根据<code>conanfile.py</code>，此处<code>wxUSE_EXPAT</code>的值应该为<code>sys</code>，即从系统寻找<code>expat</code>。因此一定是某个<code>cMake</code>脚本中强行将这个值设置为了<code>builtin</code>。</p>
+<p>经过非常困难定位（直接在代码中搜索<code>wxUSE_EXPAT</code>并不能找到目标），我发现了问题出现在<code>build/cmake/options.cmake</code>中调用的<code>wx_add_thirdparty_library</code>函数，调用点如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx_add_thirdparty_library(wxUSE_EXPAT EXPAT <span class="string">"use expat for XML parsing"</span> DEFAULT_APPLE sys)</span><br></pre></td></tr></table></figure>
+
+<p>这个函数的定义在<code>build/cmake/functions.cmake</code>中，其中关键在于：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="variable">$&#123;var_name&#125;</span> <span class="keyword">STREQUAL</span> <span class="string">"sys"</span>)</span><br><span class="line">    <span class="comment"># If the sys library can not be found use builtin</span></span><br><span class="line">    <span class="keyword">find_package</span>(<span class="variable">$&#123;lib_name&#125;</span>)</span><br><span class="line">    <span class="keyword">string</span>(TOUPPER <span class="variable">$&#123;lib_name&#125;</span> lib_name_upper)</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">NOT</span> <span class="variable">$&#123;$&#123;lib_name_upper&#125;</span>_FOUND&#125;)</span><br><span class="line">        wx_option_force_value(<span class="variable">$&#123;var_name&#125;</span> builtin)</span><br><span class="line">    <span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<p>显然，这里通过<code>find_package</code>尝试去定位<code>EXPAT</code>库。而在无法定位的情况下就会被强制改为<code>builtin</code>。</p>
+<p>那么为什么在Debug编译的时候不能成功<code>find_package</code>，但Release编译的时候可以呢？我们需要观察一下Debug编译时候引用的<code>expat</code>库。因此我们编写一个测试用的<code>conanfile.txt</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[requires]</span><br><span class="line">expat/2.2.7</span><br><span class="line"></span><br><span class="line">[generators]</span><br><span class="line">cmake</span><br></pre></td></tr></table></figure>
+
+<p>并拉取下来库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conan install . -s compiler.version=16 -s build_type=Debug</span><br></pre></td></tr></table></figure>
+
+<p>再编写一个测试用的<code>CMakeLists.txt</code>：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.14</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(<span class="keyword">Test</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(conanbuildinfo.cmake)</span><br><span class="line">conan_basic_setup()</span><br><span class="line"><span class="keyword">find_package</span>(EXPAT REQUIRED)</span><br><span class="line"><span class="keyword">message</span>(<span class="variable">$&#123;EXPAT_LIBRARIES&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行，不负众望地炸掉了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CMake Error at C:/Program Files/CMake/share/cmake-3.14/Modules/FindPackageHandleStandardArgs.cmake:137 (message):</span><br><span class="line">  Could NOT find EXPAT (missing: EXPAT_LIBRARY) (found version &quot;2.2.7&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>但是奇怪的是，它成功地找到了<code>expat</code>的目录和头文件（(found version “2.2.7”) ），却没有找到<code>expat</code>的库文件（(missing: EXPAT_LIBRARY)）。我们打开Conan下载下来的<code>expat</code>文件夹一探究竟：</p>
+<p><img src="https://i.loli.net/2019/10/05/LfySxJNvOXljEAP.png" alt="image.png"></p>
+<p>可以看到，Debug版<code>expat</code>的库文件为<code>expatd.lib</code>。而再观察CMake中用于定位<code>expat</code>的<code>FindEXPAT.cmake</code>中的代码：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_library</span>(EXPAT_LIBRARY NAMES expat libexpat HINTS <span class="variable">$&#123;PC_EXPAT_LIBRARY_DIRS&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>显然，这里没有去尝试寻找<code>expatd.lib</code>。</p>
+<p>（未完待续）</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/CharlieJiang0w0">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/charliejiang">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/5525499632">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/cqjjjzr">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://cqjjjzr.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
