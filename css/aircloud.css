@@ -1,5 +1,5 @@
 /*varibles*/
-* {
+body {
   font-family: "italic", Helvetica, Arial, "Heiti SC", "Microsoft YaHei";
 }
 body,
@@ -934,7 +934,7 @@ pre,
 }
 pre,
 code {
-  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace !important;;
+  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace !important;
 }
 code {
   padding: 2px 4px;
@@ -955,6 +955,7 @@ pre code {
 }
 .highlight {
   border-radius: 1px;
+  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace !important;
 }
 .highlight pre {
   border: none;
@@ -998,6 +999,7 @@ pre code {
 }
 .highlight .line {
   height: 20px;
+  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace !important;
 }
 .gutter {
   -webkit-user-select: none;
