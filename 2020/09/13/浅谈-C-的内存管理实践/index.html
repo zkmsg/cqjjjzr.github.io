@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content>
-    <meta name="keyword" content>
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -16,13 +16,17 @@
     </title>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/aircloud.css">
-    <link rel="stylesheet" href="/css/gitment.css">
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
     <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
     <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
 
@@ -82,7 +86,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-绪论"><span class="toc-text">0x00 绪论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-前置思维方式"><span class="toc-text">0x01 前置思维方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分开「语义」与「实现」"><span class="toc-text">分开「语义」与「实现」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从正在编写的代码对应的抽象层级思考问题"><span class="toc-text">从正在编写的代码对应的抽象层级思考问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-资源与其勾柄"><span class="toc-text">0x02 资源与其勾柄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-资源的所有权与生命周期"><span class="toc-text">0x03 资源的所有权与生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#资源的生命周期"><span class="toc-text">资源的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#销毁"><span class="toc-text">销毁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生命周期的管理"><span class="toc-text">生命周期的管理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源的所有权"><span class="toc-text">资源的所有权</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#所有者"><span class="toc-text">所有者</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-1"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转移"><span class="toc-text">转移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#出借"><span class="toc-text">出借</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进一步理解所有者"><span class="toc-text">进一步理解所有者</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-对-RAII-与智能指针的理解"><span class="toc-text">0x04 对 RAII 与智能指针的理解</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00-%E7%BB%AA%E8%AE%BA"><span class="toc-text">0x00 绪论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-%E5%89%8D%E7%BD%AE%E6%80%9D%E7%BB%B4%E6%96%B9%E5%BC%8F"><span class="toc-text">0x01 前置思维方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%BC%80%E3%80%8C%E8%AF%AD%E4%B9%89%E3%80%8D%E4%B8%8E%E3%80%8C%E5%AE%9E%E7%8E%B0%E3%80%8D"><span class="toc-text">分开「语义」与「实现」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%AD%A3%E5%9C%A8%E7%BC%96%E5%86%99%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AF%B9%E5%BA%94%E7%9A%84%E6%8A%BD%E8%B1%A1%E5%B1%82%E7%BA%A7%E6%80%9D%E8%80%83%E9%97%AE%E9%A2%98"><span class="toc-text">从正在编写的代码对应的抽象层级思考问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E8%B5%84%E6%BA%90%E4%B8%8E%E5%85%B6%E5%8B%BE%E6%9F%84"><span class="toc-text">0x02 资源与其勾柄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E8%B5%84%E6%BA%90%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">0x03 资源的所有权与生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">资源的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%80%E6%AF%81"><span class="toc-text">销毁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E7%AE%A1%E7%90%86"><span class="toc-text">生命周期的管理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83"><span class="toc-text">资源的所有权</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%80%E6%9C%89%E8%80%85"><span class="toc-text">所有者</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-1"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AC%E7%A7%BB"><span class="toc-text">转移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BA%E5%80%9F"><span class="toc-text">出借</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%90%86%E8%A7%A3%E6%89%80%E6%9C%89%E8%80%85"><span class="toc-text">进一步理解所有者</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E5%AF%B9-RAII-%E4%B8%8E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">0x04 对 RAII 与智能指针的理解</span></a></li></ol>
 </div>
     
 </div>
@@ -159,7 +163,7 @@
 
 <p>虽然现在对自动资源管理的实践越来越普遍，但是手动管理内存的方法仍然广泛存在，特别是对于初学者而言。下方资源所有权的介绍就提供了一种手段以保证手动资源管理的正确性。</p>
 <p>而自动资源管理则是藉由系统提供的一些语言特性，例如 C++ 的本地变量离开作用域自动被销毁的特性来实现。具体的实现有 RAII(Resource Aquisition Is Initialization，资源获取即初始化)和以 RAII 为基础进一步封装的智能指针（<code>shared_ptr</code> 与 <code>unique_ptr</code>等）。我们稍后会提及这部分内容，下面给出了这种实践的一个例子。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">char</span>[]&gt; buf(<span class="keyword">new</span> <span class="keyword">unsigned</span> <span class="keyword">char</span>[<span class="number">150</span>]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::unique_ptr&lt;unsigned char[]&gt; buf(new unsigned char[150]);</span><br></pre></td></tr></table></figure>
 
 <p><strong>大部分资源管理实践的目标就是解决销毁生命周期常被开发者忽略，以及销毁后已无效化的勾柄被错误地再次使用的问题。</strong>考虑如下三段代码：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span>* buf = <span class="keyword">new</span> <span class="keyword">unsigned</span> <span class="keyword">char</span>[<span class="number">1024</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span>* <span class="title">foo2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> a[<span class="number">150</span>];</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span>* <span class="title">foo3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span>* buf = foo2();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; buf[<span class="number">15</span>] &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span>* <span class="title">foo4</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span>* buf;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; buf[<span class="number">15</span>] &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -169,7 +173,6 @@
 <p>对于 <code>foo4</code> 函数，我们并没有分配任何资源。然而我们创建了一个勾柄，并尝试访问这个勾柄对应的（实际不存在的）资源，这样亦导致了未定义的行为。在涉及的资源为内存时，这一现象被称为<em>野指针</em>（wild pointer）。</p>
 <p>综上，我们需要保证<strong>资源与其第一个勾柄同时被创建，与其最后一个勾柄同时(或几乎同时)被销毁</strong>。在小型的程序中，这通常比较好办。例如：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span>* buf = <span class="keyword">new</span> <span class="keyword">unsigned</span> <span class="keyword">char</span>[<span class="number">150</span>]; <span class="comment">// 同时创建勾柄与资源本身</span></span><br><span class="line"><span class="comment">// use buf.....</span></span><br><span class="line"><span class="keyword">delete</span>[] buf;  <span class="comment">// 销毁</span></span><br><span class="line">buf = <span class="literal">nullptr</span>; <span class="comment">// 销毁勾柄</span></span><br></pre></td></tr></table></figure>
-
 <p>而在较大型的程序中，就可能需要利用下面提到的所有权，或尽量使用自动管理生命周期的对象（智能指针等）来避免这三种情况。</p>
 <h3 id="资源的所有权"><a href="#资源的所有权" class="headerlink" title="资源的所有权"></a>资源的所有权</h3><p>智能指针为C++引入了所有权这一概念。虽然C++编译器没有强制规定使用所有权机制，接纳并正确使用这一机制可以避免绝大部分上述的指针与资源生命周期不匹配的情况。</p>
 <p>所有权机制引入了所有者的概念，每一个资源被一个所有者持有，并随着所有者创建，使用和销毁。资源可以从一个所有者转移到另一个所有者，或者被其他所有者临时借用。</p>
@@ -197,8 +200,7 @@
 
 <p>在 <code>A</code> 类中我们持有一个指向一段内存的勾柄 <code>buf</code>，其在 <code>A</code> 对象创建时候被创建，在 <code>A</code> 对象销毁的时候被销毁。而在 <code>A</code> 对象被从一个地方移动到另一个地方时，我们先将新对象的 <code>buf</code> 勾柄指向旧对象的 <code>buf</code> 所指向的资源，接着销毁旧对象所持有的勾柄。这就避免了违反前述的第 2 点。</p>
 <p>对于第二种情形，考虑如下代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* str2 = <span class="built_in">std</span>::strdup(<span class="string">"iLNb!!"</span>);</span><br><span class="line"><span class="comment">// Use str2......</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">free</span>(str2);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* str2 = <span class="built_in">std</span>::strdup(<span class="string">&quot;iLNb!!&quot;</span>);</span><br><span class="line"><span class="comment">// Use str2......</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">free</span>(str2);</span><br></pre></td></tr></table></figure>
 <p>在调用 <code>strdup</code> 函数后生成的字符串的所有权被转移到我们的程序，因此我们需要负责销毁这一资源。</p>
 <h4 id="出借"><a href="#出借" class="headerlink" title="出借"></a>出借</h4><p>资源的出借/借用指的是让其他方可以“使用”这个对象，但并不转移对象的所有权。此种情况实际更为广泛。其通常表现为勾柄的传递（通过指针、引用等）。仍然考虑上述的 <code>A</code> 类：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span>* buf;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(): buf(<span class="keyword">new</span> <span class="keyword">unsigned</span> <span class="keyword">char</span>[<span class="number">150</span>]) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">set_buf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">char</span>* new_buf, <span class="keyword">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">memcpy</span>(buf, new_buf, <span class="built_in">std</span>::min(size, <span class="number">150</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span>* <span class="title">get_buf</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> buf; &#125;</span><br><span class="line"></span><br><span class="line">    A(A&amp;&amp; another) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        buf = another.buf;</span><br><span class="line">        another.buf = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    A&amp; <span class="keyword">operator</span>=(A&amp;&amp; another) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] buf;</span><br><span class="line">        buf = another.buf;</span><br><span class="line">        another.buf = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~A() <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] buf;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -289,7 +291,7 @@
         <span id="busuanzi_container_site_uv">
             <span id="busuanzi_value_site_uv"></span>UV
         </span>
-        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
 </footer>
 
 
@@ -304,7 +306,9 @@
     window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
 <script src="/js/index.js"></script>
+
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 

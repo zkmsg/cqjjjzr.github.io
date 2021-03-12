@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content>
-    <meta name="keyword" content>
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -16,13 +16,17 @@
     </title>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/aircloud.css">
-    <link rel="stylesheet" href="/css/gitment.css">
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
     <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
     <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
 
@@ -82,7 +86,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#解决过程"><span class="toc-text">解决过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#链接"><span class="toc-text">链接</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E8%BF%87%E7%A8%8B"><span class="toc-text">解决过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5"><span class="toc-text">链接</span></a></li></ol>
 </div>
     
 </div>
@@ -140,27 +144,27 @@
 <li>IntelliJ IDEA 2017.1</li>
 <li>Visual Studio 2015(调试) &amp; 2010(编译)</li>
 </ul>
-<p>最近我在写某个 <a href="https://github.com/cqjjjzr/Laplacian" target="_blank" rel="noopener">Project</a> 的时候想用 Java Sound 播放从 FFmpeg 解码出来的 PCM 数据。其中我想让用户选择声卡，于是照着网上的某个范例写了这么一些代码（Kotlin的，凑合着看）：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">AudioSystem.getMixerInfo().forEach &#123;</span><br><span class="line">    println(<span class="string">"info: "</span> + it.toString())</span><br><span class="line">AudioSystem.getMixer(it).apply &#123;</span><br><span class="line">        println(<span class="string">"output "</span> + <span class="keyword">this</span>)</span><br><span class="line">sourceLineInfo.forEach &#123;</span><br><span class="line">            println(<span class="string">"    info: "</span> + it.toString())</span><br><span class="line">AudioSystem.getLine(it).apply &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">this</span> <span class="keyword">is</span> SourceDataLine) &#123;</span><br><span class="line">                    (<span class="keyword">this</span>.lineInfo <span class="keyword">as</span> DataLine.Info).formats.forEach &#123;</span><br><span class="line">                        println(<span class="string">"    format: "</span> + format.toString())</span><br><span class="line">&#125;</span><br><span class="line">                &#125;</span><br><span class="line">&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最近我在写某个 <a target="_blank" rel="noopener" href="https://github.com/cqjjjzr/Laplacian">Project</a> 的时候想用 Java Sound 播放从 FFmpeg 解码出来的 PCM 数据。其中我想让用户选择声卡，于是照着网上的某个范例写了这么一些代码（Kotlin的，凑合着看）：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">AudioSystem.getMixerInfo().forEach &#123;</span><br><span class="line">    println(<span class="string">&quot;info: &quot;</span> + it.toString())</span><br><span class="line">AudioSystem.getMixer(it).apply &#123;</span><br><span class="line">        println(<span class="string">&quot;output &quot;</span> + <span class="keyword">this</span>)</span><br><span class="line">sourceLineInfo.forEach &#123;</span><br><span class="line">            println(<span class="string">&quot;    info: &quot;</span> + it.toString())</span><br><span class="line">AudioSystem.getLine(it).apply &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">this</span> <span class="keyword">is</span> SourceDataLine) &#123;</span><br><span class="line">                    (<span class="keyword">this</span>.lineInfo <span class="keyword">as</span> DataLine.Info).formats.forEach &#123;</span><br><span class="line">                        println(<span class="string">&quot;    format: &quot;</span> + format.toString())</span><br><span class="line">&#125;</span><br><span class="line">                &#125;</span><br><span class="line">&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>上面这段代码会罗列出所有系统中的输出设备，但是执行却得出了这样的效果（部分）：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img1.png" title="actual">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img1.png" class="" title="actual">
 
 <p>设备名称变成了乱码。但是如果把这些乱码拷到Notepad++里面会发现根本没办法转换，无论如何都是乱码。同时也与锟斤拷等 UTF-8 字符被用 GBK 解释时出现的乱码不同。并且无法用 Java 中出字符集问题时候的各种解决方法（修改 <code>file.encoding</code>，<code>chcp</code> 修改控制台字符集，等等）解决。</p>
-<p>于是就去群里问。然后就出现了dalao！<a href="https://www.zhihu.com/people/510c8b17a63363f80da934ff7af10cea" target="_blank" rel="noopener">@dram</a> 大佬！</p>
+<p>于是就去群里问。然后就出现了dalao！<a target="_blank" rel="noopener" href="https://www.zhihu.com/people/510c8b17a63363f80da934ff7af10cea">@dram</a> 大佬！</p>
 <p>我们用2进制模式查看第一串乱码：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img2.png" title="addr">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img2.png" class="" title="addr">
 
 <p>熟悉 Unicode 那一套理论的可能发现这个编码看起来有点像 UTF-8 编码过的双字节字符，<code>110xxxx 10xxxxxx</code>两个字节一个字符。我们按照这种方法提取，得到了这样一组数据：00011010110 00011110111 00011001001 00011111001 00011010010 00011110100 00011000111 00011111101 00010110110 00010101111 00010110011。</p>
 <p>去掉前导0，得到：11010110 11110111 11001001 11111001 11010010 11110100 11000111 11111101 10110110 10101111 10110011，换成16进制：d6 f7 c9 f9 d2 f4 c7 fd b6 af b3，输进16进制编辑器里面：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img3.png" title="fixed1">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img3.png" class="" title="fixed1">
 
 <p>然后换到普通编辑器，用ANSI（中文Windows上就等于GBK）编码打开，发现出现了正确的字符！</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img4.png" title="ansi">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img4.png" class="" title="ansi">
 
 <p>原来这串乱码是<strong>被UTF-8编码的ANSI字符串</strong>！</p>
 <p>然后我就写了一个简单的函数来修复这个问题：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> HIGH_IDENTIFY = <span class="number">0b11000000</span>.toByte()</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">javaSoundRecoverMessyCode</span><span class="params">(string: <span class="type">String</span>)</span></span>: String &#123;</span><br><span class="line">    <span class="keyword">return</span> String(ArrayList&lt;<span class="built_in">Byte</span>&gt;().apply <span class="symbol">buf@</span> &#123;</span><br><span class="line">        string.toByteArray().apply &#123;</span><br><span class="line">            <span class="keyword">var</span> i = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> (i &lt; <span class="keyword">this</span>.size) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((<span class="keyword">this</span>[i] and HIGH_IDENTIFY) == HIGH_IDENTIFY) &#123;</span><br><span class="line">                    <span class="keyword">this</span><span class="symbol">@buf</span> += (<span class="keyword">this</span>[i].toInt() shl <span class="number">6</span> or (<span class="keyword">this</span>[i + <span class="number">1</span>].toInt() shl <span class="number">2</span> ushr <span class="number">2</span>)).toByte()</span><br><span class="line">                    i++</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">this</span><span class="symbol">@buf</span> += <span class="keyword">this</span>[i]</span><br><span class="line">                &#125;</span><br><span class="line">                i++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;.toByteArray(), Charset.forName(System.getProperty(<span class="string">"file.encoding"</span>)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> HIGH_IDENTIFY = <span class="number">0b11000000</span>.toByte()</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">javaSoundRecoverMessyCode</span><span class="params">(string: <span class="type">String</span>)</span></span>: String &#123;</span><br><span class="line">    <span class="keyword">return</span> String(ArrayList&lt;<span class="built_in">Byte</span>&gt;().apply <span class="symbol">buf@</span> &#123;</span><br><span class="line">        string.toByteArray().apply &#123;</span><br><span class="line">            <span class="keyword">var</span> i = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> (i &lt; <span class="keyword">this</span>.size) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((<span class="keyword">this</span>[i] and HIGH_IDENTIFY) == HIGH_IDENTIFY) &#123;</span><br><span class="line">                    <span class="keyword">this</span><span class="symbol">@buf</span> += (<span class="keyword">this</span>[i].toInt() shl <span class="number">6</span> or (<span class="keyword">this</span>[i + <span class="number">1</span>].toInt() shl <span class="number">2</span> ushr <span class="number">2</span>)).toByte()</span><br><span class="line">                    i++</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">this</span><span class="symbol">@buf</span> += <span class="keyword">this</span>[i]</span><br><span class="line">                &#125;</span><br><span class="line">                i++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;.toByteArray(), Charset.forName(System.getProperty(<span class="string">&quot;file.encoding&quot;</span>)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>写的可能比较丑，不要在意。但是我发现了几个问题：</p>
 <ul>
@@ -169,30 +173,30 @@
 <li>上面的代码依赖了<code>file.encoding</code>环境属性，这个属性必须是系统的ANSI对应的字符集，如果有人（没错就是IDEA）将这个属性设置成了UTF-8之类的就没法判定系统字符集，造成无法修复；</li>
 <li>肯定有别的人踩坑！</li>
 </ul>
-<p>所以我就去锤 Oracle，最开始发了一个<a href="http://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8177951" target="_blank" rel="noopener">Bug Report</a>，但是那边一直说没法reproduce这个问题，经过几轮<a href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-June/thread.html" target="_blank" rel="noopener">邮件交流</a>之后发现他们确实缺少调试环境。然后就这样拖了俩月。那边一直不温不火的。（那时候我和他们都没有意识到，这个不仅仅是中文OS的问题，CJK乃至所有非ASCII的语种都有这个问题）</p>
+<p>所以我就去锤 Oracle，最开始发了一个<a target="_blank" rel="noopener" href="http://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8177951">Bug Report</a>，但是那边一直说没法reproduce这个问题，经过几轮<a target="_blank" rel="noopener" href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-June/thread.html">邮件交流</a>之后发现他们确实缺少调试环境。然后就这样拖了俩月。那边一直不温不火的。（那时候我和他们都没有意识到，这个不仅仅是中文OS的问题，CJK乃至所有非ASCII的语种都有这个问题）</p>
 <p>然后我觉得不能忍了，就决定自己开始Hack。经过几天痛苦的Clone，我从JDK9仓库拿到了OpenJDK的代码（垃圾Hg）。然后顺着Java端代码一路查，查到<code>com.sun.media.sound.DirectAudioDevice</code>这里发现<code>DirectAudioDeviceInfo</code>是从native代码创建的：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img5.png" title="probjv">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img5.png" class="" title="probjv">
 
 <p>继续查。根据直觉，代码应该在<code>jdk/src/java.desktop</code>下面的某个地方。直接notepad++在文件中搜索方法名，找到了在<code>DirectAudioProvider.c</code>里面：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img6.png" title="probcppdef">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img6.png" class="" title="probcppdef">
 
 <p>继续排查，发现这里用了一个<code>NewStringUTF</code>，这个函数会接受一个“改良UTF-8”字符串，记录下来，继续排查：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img7.png" title="newstring">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img7.png" class="" title="newstring">
 
 <p>接下来看到<code>desc</code>来自这个函数</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img8.png" title="img8">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img8.png" class="" title="img8">
 
 <p><code>DirectAutioDescription</code>是一个结构体，查看定义（在<code>DirectAudio.h</code>中）可以发现其中<code>name</code>就是一个<code>char[]</code>。</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img9.png" title="img9">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img9.png" class="" title="img9">
 
 <p>跟着上面的函数，<code>DAUDIO_GetDirectAudioDeviceDescription</code>来自<code>DirectAudio.h</code>，看JavaDoc可以发现<code>DirectAudio</code>是sun弄的一种相当于直接访问音频硬件的功能，所以必定是平台相关的了。那跟着Windows找呢，果然，在<code>jdk/src/java.desktop/windows/native/libjsound/</code>里面，<code>PLATFORM_API_WinOS_DirectSound.cpp</code>有实现。在大约246行：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img10.png" title="img10">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img10.png" class="" title="img10">
 
 <p>这里涉及到了一点DirectSound（名字很相像，DirectAudio是Java的东西，DirectSound是M$的东西）的知识。简单来说就是<code>DirectSoundEnumerate</code>会回调某个函数来枚举每个音频设备。上面的代码可以看到回调的函数是<code>DS_GetDescEnum</code>，观察这个函数。</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img11.png" title="img11">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img11.png" class="" title="img11">
 
 <p>显然，传进来的<code>lpstrDescription</code>就是设备名称。这里直接将其拷贝进了<code>desc-&gt;name</code>里面。问题来了，在ASCII的上下文里面，可以直接拷贝，但是如果是非ASCII，可能会包含别的字符。后面我们会了解到JDK编译多半是用的多字节模式，这样<code>DirectSoundEnumerate=DirectSoundEnumerateA</code>，使用ANSI字符集（Windows 下对应 GBK）。问题来了，还记得前面如何将这个<code>LPCSTR</code>（也就是<code>char*</code>）格式的字符串传进虚拟机的吗？对，<code>NewStringUTF</code>！我们看看这个函数的文档：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img12.png" title="jdoc">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img12.png" class="" title="jdoc">
 
 <p>问题明了了，JVM以为这个<code>desc-&gt;name</code>是以“改良UTF-8”编码的Unicode字符串，但实际上它是GBK字符串。所以JVM发现其不是UTF-8，就直接把ANSI字符集的字符串编码成了UTF-8。那么这个字符串就彻底崩坏了，变成了<strong>UTF-8编码的ANSI字符串。</strong></p>
 <p>那么如何解决呢？写一个函数把ANSI转换为UTF-8即可。本来可以转换成UTF-16然后丢给<code>NewString</code>函数，但是为了尽可能少修改API，我们就通过WIndows API把ANSI转换为UTF-16宽字符，再转换为UTF-8，就像下面那样：</p>
@@ -202,21 +206,21 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL CALLBACK <span class="title">DS_GetDescEnum</span><span class="params">(LPGUID lpGuid,</span></span></span><br><span class="line"><span class="function"><span class="params">                             LPCSTR lpstrDescription,</span></span></span><br><span class="line"><span class="function"><span class="params">                             LPCSTR lpstrModule,</span></span></span><br><span class="line"><span class="function"><span class="params">                             DirectAudioDeviceDescription* desc)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    INT32 cacheIndex = findCacheItemByGUID(lpGuid, g_audioDeviceCache[desc-&gt;deviceID].isSource);</span><br><span class="line">    <span class="keyword">if</span> (cacheIndex == desc-&gt;deviceID) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> UNICODE</span></span><br><span class="line">        LPCSTR utf8EncodedName = ANSIToUTF8(lpstrDescription);</span><br><span class="line">        <span class="built_in">strncpy</span>(desc-&gt;name, utf8EncodedName, DAUDIO_STRING_LENGTH);</span><br><span class="line">        <span class="keyword">delete</span> utf8EncodedName;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">        <span class="built_in">strncpy</span>(desc-&gt;name, lpstrDescription, DAUDIO_STRING_LENGTH);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        <span class="comment">//strncpy(desc-&gt;description, lpstrModule, DAUDIO_STRING_LENGTH);</span></span><br><span class="line">        desc-&gt;maxSimulLines = <span class="number">-1</span>;</span><br><span class="line">        <span class="comment">/* do not continue enumeration */</span></span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在Unicode模式就不会重新编码。</p>
-<p>然后写完之后问题来了，我没法调试。机器上装的Visual Studio 2015，不被OpenJDK支持（2021/03 <em>注：在当时OpenJDK还没有支持新版本VS</em>）。在经历了各种打patch，甚至劫持CL.exe，无数次失败之后，我在昨天晚上选择了放弃，发了一封E-Mail给JSound的<a href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-June/000564.html" target="_blank" rel="noopener">Mailing List</a>。顺便还弄了一个Patch，如果各位有兴趣可以过去看看。</p>
+<p>然后写完之后问题来了，我没法调试。机器上装的Visual Studio 2015，不被OpenJDK支持（2021/03 <em>注：在当时OpenJDK还没有支持新版本VS</em>）。在经历了各种打patch，甚至劫持CL.exe，无数次失败之后，我在昨天晚上选择了放弃，发了一封E-Mail给JSound的<a target="_blank" rel="noopener" href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-June/000564.html">Mailing List</a>。顺便还弄了一个Patch，如果各位有兴趣可以过去看看。</p>
 <p>今天早上，我觉得不行，还是得自己动手丰衣足食。在another ∞次失败之后，我还是向黑恶势力低头，装了一个VIsual Studio 2010 Express。</p>
 <p>又经历了无数次惨痛的修改，终于出了exe，发现一次成功。</p>
 <p>接下来就清理一下代码准备发pr吧。下面给一张最终效果图：</p>
-<img src="/2017/06/25/记一个-Java-Bug-修复-JavaSound-的字符集问题/img13.jpg" title="img13">
+<img src="/2017/06/25/%E8%AE%B0%E4%B8%80%E4%B8%AA-Java-Bug-%E4%BF%AE%E5%A4%8D-JavaSound-%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%97%AE%E9%A2%98/img13.jpg" class="" title="img13">
 
 <p>最后我将本 Patch （经过OpenJDK上 reviewer 的指示，做了一些修改）提交到了仓库，并并入 JDK 10 的代码中。</p>
-<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>Java Bug Database 上的Bug报告：<a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8177951" target="_blank" rel="noopener">https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8177951</a></p>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>Java Bug Database 上的Bug报告：<a target="_blank" rel="noopener" href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8177951">https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8177951</a></p>
 <p>Java 的 Mailing List 上对本 Bug 的讨论：</p>
 <ul>
-<li><a href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-June/thread.html" target="_blank" rel="noopener">http://mail.openjdk.java.net/pipermail/sound-dev/2017-June/thread.html</a></li>
-<li><a href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-July/thread.html" target="_blank" rel="noopener">http://mail.openjdk.java.net/pipermail/sound-dev/2017-July/thread.html</a></li>
-<li><a href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-August/thread.html" target="_blank" rel="noopener">http://mail.openjdk.java.net/pipermail/sound-dev/2017-August/thread.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-June/thread.html">http://mail.openjdk.java.net/pipermail/sound-dev/2017-June/thread.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-July/thread.html">http://mail.openjdk.java.net/pipermail/sound-dev/2017-July/thread.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-August/thread.html">http://mail.openjdk.java.net/pipermail/sound-dev/2017-August/thread.html</a></li>
 </ul>
-<p>其中标有 <code>8177951</code> 的邮件。最终 Patch 在 <a href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-August/000594.html" target="_blank" rel="noopener">http://mail.openjdk.java.net/pipermail/sound-dev/2017-August/000594.html</a> 给出.</p>
+<p>其中标有 <code>8177951</code> 的邮件。最终 Patch 在 <a target="_blank" rel="noopener" href="http://mail.openjdk.java.net/pipermail/sound-dev/2017-August/000594.html">http://mail.openjdk.java.net/pipermail/sound-dev/2017-August/000594.html</a> 给出.</p>
 
         
         <br />
@@ -288,7 +292,7 @@
         <span id="busuanzi_container_site_uv">
             <span id="busuanzi_value_site_uv"></span>UV
         </span>
-        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
 </footer>
 
 
@@ -303,7 +307,9 @@
     window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
 <script src="/js/index.js"></script>
+
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
